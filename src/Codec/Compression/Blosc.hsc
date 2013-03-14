@@ -10,12 +10,18 @@ import Foreign.C
 import System.IO.Unsafe (unsafePerformIO)
 import Control.Applicative
 
-import qualified Data.ByteString as S
+import qualified Data.ByteString as B
 
-import qualified Data.ByteString.Unsafe as U
+import qualified Data.ByteString.Unsafe as BU
 import GHC.Conc (getNumCapabilities)
 
-import qualified Data.ByteString.Internal as SI (createAndTrim)
+import qualified Data.ByteString.Internal as BI (createAndTrim,ByteString(..))
+
+import qualified  Data.Vector.Storable.Mutable as VSM
+import qualified  Data.Vector.Storable as VS 
+
+import  Foreign.ForeignPtr  (withForeignPtr)
+
 
 {-int blosc_compress(int clevel, int doshuffle, size_t typesize, size_t nbytes,
                    const void *src, void *dest, size_t destsize);-}
